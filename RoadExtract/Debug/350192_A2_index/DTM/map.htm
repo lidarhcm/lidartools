@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>My Map Set Name (Google Maps Export from Global Mapper)</title>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+
+    var G = google.maps;
+    var map;
+    
+    var customMapType = new G.ImageMapType
+      (
+        {
+        getTileUrl: function(coord, zoom)
+          {
+          var normalizedCoord = getNormalizedCoord(coord, zoom);
+          if (!normalizedCoord) { return null; }
+          
+          if ( zoom == 13 && normalizedCoord.x >= 6522 && normalizedCoord.x <= 6522 && normalizedCoord.y >= 3848 && normalizedCoord.y <= 3849 )
+          {
+            return "file:///D://Project//RoadExtract//Release//350192_A1//DTM//Z" + zoom + "/" + normalizedCoord.y + "/" + normalizedCoord.x + ".png"; // replace that with a "real" URL
+          }
+          else if ( zoom == 14 && normalizedCoord.x >= 13045 && normalizedCoord.x <= 13045 && normalizedCoord.y >= 7697 && normalizedCoord.y <= 7698 )
+          {
+            return "file:///D://Project//RoadExtract//Release//350192_A1//DTM//Z" + zoom + "/" + normalizedCoord.y + "/" + normalizedCoord.x + ".png"; // replace that with a "real" URL
+          }
+          else if ( zoom == 15 && normalizedCoord.x >= 26090 && normalizedCoord.x <= 26091 && normalizedCoord.y >= 15395 && normalizedCoord.y <= 15396 )
+          {
+            return "file:///D://Project//RoadExtract//Release//350192_A1//DTM//Z" + zoom + "/" + normalizedCoord.y + "/" + normalizedCoord.x + ".png"; // replace that with a "real" URL
+          }
+          else if ( zoom == 16 && normalizedCoord.x >= 52181 && normalizedCoord.x <= 52182 && normalizedCoord.y >= 30791 && normalizedCoord.y <= 30792 )
+          {
+            return "file:///D://Project//RoadExtract//Release//350192_A1//DTM//Z" + zoom + "/" + normalizedCoord.y + "/" + normalizedCoord.x + ".png"; // replace that with a "real" URL
+          }
+          else if ( zoom == 17 && normalizedCoord.x >= 104362 && normalizedCoord.x <= 104365 && normalizedCoord.y >= 61582 && normalizedCoord.y <= 61585 )
+          {
+            return "file:///D://Project//RoadExtract//Release//350192_A1//DTM//Z" + zoom + "/" + normalizedCoord.y + "/" + normalizedCoord.x + ".png"; // replace that with a "real" URL
+          }
+          return null;
+        },
+
+        alt: "My Map Set Name",
+        tileSize: new G.Size(256, 256),
+        isPng: true,
+        maxZoom: 17,
+        minZoom: 13,
+        opacity: 1.00,
+        name: "My Map Set Name"
+      }
+    )
+
+    function getNormalizedCoord(coord, zoom)
+    {
+      var y = coord.y;
+      var x = coord.x;
+      
+      var tileRange = 1 << zoom;
+      
+      if (y < 0 || y >= tileRange) { return null; }
+      if (x < 0 || x >= tileRange)
+      {
+        x = (x % tileRange + tileRange) % tileRange;
+      }
+      
+      return { x: x, y: y };
+    }
+
+    function initialize()
+    {
+      var myLatlng = new G.LatLng(10.790138,106.633301);
+      var myOptions = {
+        center: myLatlng,
+        zoom: 13,
+        mapTypeId: G.MapTypeId.ROADMAP,
+        mapTypeControl: true,
+        overviewMapControl: false,
+        scaleControl: true,
+        streetViewControl: true,
+        panControl: true,
+        zoomControl: true,
+        zoomControlOptions: { style: google.maps.ZoomControlStyle.DEFAULT }
+      };
+      
+      map = new G.Map(document.getElementById("map_canvas"), myOptions);
+      map.overlayMapTypes.insertAt(0, customMapType);
+    }
+    </script>
+</head>
+<body onload="initialize()">
+<div id="map_canvas" style="width: 100%; height: 800px; margin: 0px 0px 0px 0px; float: middle;"></div>
+</body> </html>

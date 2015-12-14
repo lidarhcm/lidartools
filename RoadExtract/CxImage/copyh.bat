@@ -1,0 +1,9 @@
+copy jasper\jasper.h ..\include
+copy jbig\jbig.h ..\include
+copy j2k\j2k.h ..\include
+copy jpeg\jpeglib.h ..\include
+copy png\png.h ..\include
+copy tiff\tiff.h ..\include
+copy zlib\zlib.h ..\include
+copy zlib\zconf.h ..\include
+copy x*.h ..\include
